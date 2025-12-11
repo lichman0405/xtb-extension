@@ -1,11 +1,12 @@
 {
   "name": "xtb-xcontrol",
-  "displayName": "xTB xcontrol",
-  "description": "Syntax highlighting and language support for xTB xcontrol files",
+  "displayName": "xTB xcontrol Language Support",
+  "description": "Syntax highlighting, diagnostics, and code snippets for xTB xcontrol files",
   "version": "0.1.0",
   "publisher": "lichman0405",
   "author": "lichman0405",
   "license": "MIT",
+  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/lichman0405/xtb-extension.git"
