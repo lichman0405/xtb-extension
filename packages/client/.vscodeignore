@@ -1,0 +1,53 @@
+# Build outputs to exclude
+src/
+tsconfig.json
+tsconfig.tsbuildinfo
+*.d.ts
+*.d.ts.map
+!dist/**/*.d.ts
+
+# Development files
+*.md
+!README.md
+.vscode/
+.vscode-test/
+
+# Dependencies (include only necessary compiled files)
+node_modules/
+
+# Tests
+test/
+*.test.ts
+*.spec.ts
+
+# Git
+.git/
+.gitignore
+.github/
+
+# CI/CD
+.gitlab-ci.yml
+.travis.yml
+
+# Exclude parent directory files and folders
+../../**
+
+# Exclude sibling package files except compiled JS
+../server/**/*.ts
+../server/**/*.d.ts
+../server/**/*.d.ts.map
+../server/**/*.map
+../server/tsconfig.json
+../server/tsconfig.tsbuildinfo
+../server/package.json
+../shared/**/*.ts
+../shared/**/*.d.ts
+../shared/**/*.d.ts.map
+../shared/**/*.map
+../shared/tsconfig.json
+../shared/tsconfig.tsbuildinfo
+../shared/package.json
+
+# Misc
+*.log
+*.vsix
