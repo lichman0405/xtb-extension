@@ -1,0 +1,49 @@
+{
+  "name": "xtb-xcontrol-vscode-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "VS Code extension for xTB xcontrol file editing with syntax highlighting and LSP support",
+  "author": "lichman0405",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lichman0405/xtb-extension.git"
+  },
+  "workspaces": [
+    "packages/client",
+    "packages/server",
+    "packages/shared"
+  ],
+  "scripts": {
+    "build": "npm run build:shared && npm run build:server && npm run build:client",
+    "build:client": "npm run build -w xtb-xcontrol",
+    "build:server": "npm run build -w @xtb-xcontrol/server",
+    "build:shared": "npm run build -w @xtb-xcontrol/shared",
+    "watch": "npm run watch -w xtb-xcontrol & npm run watch -w @xtb-xcontrol/server & npm run watch -w @xtb-xcontrol/shared",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
+    "test": "npm test -ws --if-present",
+    "test:client": "npm test -w xtb-xcontrol",
+    "test:server": "npm test -w @xtb-xcontrol/server",
+    "test:shared": "npm test -w @xtb-xcontrol/shared",
+    "clean": "npm run clean -ws --if-present && rimraf node_modules",
+    "package": "npm run package -w xtb-xcontrol",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

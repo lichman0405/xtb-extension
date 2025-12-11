@@ -1,0 +1,162 @@
+{
+  "name": "xtb-xcontrol",
+  "displayName": "xTB xcontrol",
+  "description": "Syntax highlighting and language support for xTB xcontrol files",
+  "version": "0.1.0",
+  "publisher": "lichman0405",
+  "author": "lichman0405",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lichman0405/xtb-extension.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Snippets"
+  ],
+  "keywords": [
+    "xtb",
+    "xcontrol",
+    "computational chemistry",
+    "quantum chemistry",
+    "chemistry"
+  ],
+  "activationEvents": [
+    "onLanguage:xtb-xcontrol"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "xtb-xcontrol",
+        "aliases": [
+          "xTB xcontrol",
+          "xtb"
+        ],
+        "extensions": [
+          ".xcontrol",
+          ".xtbrc"
+        ],
+        "filenames": [
+          "xtb.inp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "xtb-xcontrol",
+        "scopeName": "source.xtb-xcontrol",
+        "path": "./syntaxes/xtb.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "xTB xcontrol",
+      "properties": {
+        "xtbXcontrol.diagnostics.unknownInstruction": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "error",
+          "description": "Severity for unknown instruction diagnostics"
+        },
+        "xtbXcontrol.diagnostics.unknownOption": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "warning",
+          "description": "Severity for unknown option key diagnostics"
+        },
+        "xtbXcontrol.diagnostics.suspiciousOperator": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "warning",
+          "description": "Severity for suspicious operator usage diagnostics"
+        },
+        "xtbXcontrol.diagnostics.duplicateOption": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "warning",
+          "description": "Severity for duplicate single-assignment option diagnostics"
+        },
+        "xtbXcontrol.diagnostics.orphanOption": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "error",
+          "description": "Severity for orphan option diagnostics"
+        },
+        "xtbXcontrol.diagnostics.missingEnd": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "hint",
+            "off"
+          ],
+          "default": "hint",
+          "description": "Severity for missing $end terminator diagnostics"
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "xtb-xcontrol",
+        "path": "./snippets/xtb.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -b",
+    "watch": "tsc -b --watch",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "test": "echo \"No tests yet for client package\"",
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
+  },
+  "dependencies": {
+    "@xtb-xcontrol/shared": "*",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.2"
+  }
+}

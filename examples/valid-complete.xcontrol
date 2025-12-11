@@ -1,0 +1,31 @@
+# Quick Test - Valid xcontrol file
+# Should have NO errors or warnings
+
+$chrg 0
+$spin 0
+
+$fix
+   atoms: 1-5
+   elements: C,H
+$end
+
+$constrain
+   distance: 6,7,2.5
+   angle: 6,7,8,120.0
+$end
+
+$wall
+   potential=logfermi
+   sphere: auto,30
+   alpha=1.0
+   temp=300
+$end
+
+$opt
+   maxcycle=200
+   engine=rf
+$end
+
+$write
+   charges=true
+$end

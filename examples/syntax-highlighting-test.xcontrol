@@ -1,0 +1,64 @@
+# Pure Syntax Highlighting Test
+# This file tests syntax highlighting for various token types
+# It may contain invalid options - that's intentional!
+
+# Instructions should be colored
+$chrg 0
+$spin 1
+
+# Group instruction
+$fix
+   # Comments should be gray
+   atoms: 1-5,10,15-20    # Inline comment
+   elements: C,H,N
+$end
+
+# Test various number formats (syntax highlighting only)
+$test_numbers
+   integer: 42
+   negative: -10
+   float: 3.14159
+   scientific: 1.0e-6
+   sci_upper: 2.5E+10
+   negative_sci: -1.23e-4
+$end
+
+# Test string highlighting
+$test_strings
+   double_quoted: "This is a string"
+   single_quoted: 'Another string'
+   with_path: "/path/to/file.xyz"
+   unquoted: plain_value
+$end
+
+# Test operators
+$test_operators
+   colon_style: value1,value2,value3
+   equals_style=value4
+   mixed: both,styles
+   another=test
+$end
+
+# Test boolean-like keywords
+$test_booleans
+   flag1: true
+   flag2: false
+   flag3: yes
+   flag4: no
+   flag5: on
+   flag6: off
+   flag7: auto
+$end
+
+# Unknown instruction (should show as error)
+$this_is_unknown
+   some_option: value
+$end
+
+# Test special characters in values
+$test_special
+   path: /usr/local/bin
+   email: user@example.com
+   range: 1-10,15-20,30
+   formula: CH3-CH2-OH
+$end

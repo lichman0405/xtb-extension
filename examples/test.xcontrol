@@ -1,0 +1,23 @@
+# Example xTB xcontrol file for testing
+
+$chrg 0
+$spin 0
+
+$fix
+   atoms: 1-5,10
+   elements: C,H
+$end
+
+$constrain
+   distance: 1,2,2.5
+   angle: 1,2,3,109.5
+$end
+
+$wall
+   potential=logfermi
+   sphere: auto,30
+   temp=300
+$end
+
+# This is a comment
+$cmd xtb coord --opt

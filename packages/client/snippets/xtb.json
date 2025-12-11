@@ -1,0 +1,184 @@
+{
+  "Fix atoms block": {
+    "prefix": "xtb.fix",
+    "body": ["\\$fix", "   atoms: ${1:1-5}", "   elements: ${2:C,H}", "\\$end"],
+    "description": "Create a $fix instruction block to fix atoms during optimization"
+  },
+  "Constrain geometry": {
+    "prefix": "xtb.constrain",
+    "body": ["\\$constrain", "   ${1|distance,angle,dihedral|}: ${2:1,2,2.5}", "\\$end"],
+    "description": "Create a $constrain instruction block for geometric constraints"
+  },
+  "Distance constraint": {
+    "prefix": "xtb.distance",
+    "body": ["distance: ${1:atom1},${2:atom2},${3:distance}"],
+    "description": "Add a distance constraint between two atoms"
+  },
+  "Angle constraint": {
+    "prefix": "xtb.angle",
+    "body": ["angle: ${1:atom1},${2:atom2},${3:atom3},${4:angle}"],
+    "description": "Add an angle constraint between three atoms"
+  },
+  "Dihedral constraint": {
+    "prefix": "xtb.dihedral",
+    "body": ["dihedral: ${1:atom1},${2:atom2},${3:atom3},${4:atom4},${5:angle}"],
+    "description": "Add a dihedral angle constraint between four atoms"
+  },
+  "Wall potential": {
+    "prefix": "xtb.wall",
+    "body": [
+      "\\$wall",
+      "   potential=${1|logfermi,polynomial|}",
+      "   ${2|sphere,ellipsoid|}: ${3:auto,30}",
+      "   alpha=${4:1.0}",
+      "   beta=${5:6}",
+      "   temp=${6:300}",
+      "\\$end"
+    ],
+    "description": "Create a $wall instruction block for confining potential"
+  },
+  "Write output": {
+    "prefix": "xtb.write",
+    "body": ["\\$write", "   ${1:charges}=${2|true,false|}", "\\$end"],
+    "description": "Create a $write instruction block to control output"
+  },
+  "Optimization settings": {
+    "prefix": "xtb.opt",
+    "body": [
+      "\\$opt",
+      "   maxcycle=${1:200}",
+      "   engine=${2|rf,lbfgs|}",
+      "   optlevel: ${3|crude,sloppy,loose,normal,tight,vtight,extreme|}",
+      "\\$end"
+    ],
+    "description": "Create an $opt instruction block for optimization settings"
+  },
+  "Charge": {
+    "prefix": "xtb.chrg",
+    "body": ["\\$chrg ${1:0}"],
+    "description": "Set molecular charge"
+  },
+  "Spin": {
+    "prefix": "xtb.spin",
+    "body": ["\\$spin ${1:0}"],
+    "description": "Set spin state (unpaired electrons)"
+  },
+  "Command": {
+    "prefix": "xtb.cmd",
+    "body": ["\\$cmd ${1:xtb coord --opt}"],
+    "description": "Specify xTB command to execute"
+  },
+  "Scan coordinate": {
+    "prefix": "xtb.scan",
+    "body": [
+      "\\$scan",
+      "   ${1|distance,angle,dihedral|}: ${2:1,2}",
+      "   start=${3:1.0}",
+      "   end=${4:3.0}",
+      "   steps=${5:20}",
+      "\\$end"
+    ],
+    "description": "Create a $scan instruction block for coordinate scanning"
+  },
+  "GFN method": {
+    "prefix": "xtb.gfn",
+    "body": ["\\$gfn", "   method=${1|gfn2,gfn1,gfnff|}", "\\$end"],
+    "description": "Set GFN method"
+  },
+  "Symmetry": {
+    "prefix": "xtb.symmetry",
+    "body": ["\\$symmetry ${1:c1}"],
+    "description": "Set molecular symmetry"
+  },
+  "Embedding": {
+    "prefix": "xtb.embedding",
+    "body": ["\\$embedding", "   input=${1:pdb}", "   ${2:at}=${3:1-10}", "\\$end"],
+    "description": "Create an $embedding instruction block"
+  },
+  "Hessian calculation": {
+    "prefix": "xtb.hess",
+    "body": ["\\$hess", "   sccacc=${1:1.0}", "\\$end"],
+    "description": "Create a $hess instruction block for Hessian calculation"
+  },
+  "Metadynamics": {
+    "prefix": "xtb.metadyn",
+    "body": [
+      "\\$metadyn",
+      "   atoms: ${1:1-10}",
+      "   kpush=${2:0.01}",
+      "   alpha=${3:1.0}",
+      "\\$end"
+    ],
+    "description": "Create a $metadyn instruction block for metadynamics"
+  },
+  "Full xcontrol template": {
+    "prefix": "xtb.template",
+    "body": [
+      "# xTB xcontrol file",
+      "# ${1:Description}",
+      "",
+      "\\$chrg ${2:0}",
+      "\\$spin ${3:0}",
+      "",
+      "\\$fix",
+      "   atoms: ${4:1-5}",
+      "\\$end",
+      "",
+      "\\$constrain",
+      "   distance: ${5:1,2,2.5}",
+      "\\$end",
+      "",
+      "\\$wall",
+      "   potential=logfermi",
+      "   sphere: auto,${6:30}",
+      "   temp=${7:300}",
+      "\\$end",
+      "",
+      "\\$opt",
+      "   maxcycle=${8:200}",
+      "   engine=rf",
+      "\\$end",
+      "",
+      "\\$write",
+      "   charges=true",
+      "\\$end"
+    ],
+    "description": "Create a complete xcontrol file template"
+  },
+  "Simple optimization template": {
+    "prefix": "xtb.simple",
+    "body": [
+      "# Simple optimization",
+      "",
+      "\\$chrg ${1:0}",
+      "\\$spin ${2:0}",
+      "",
+      "\\$opt",
+      "   maxcycle=${3:200}",
+      "\\$end"
+    ],
+    "description": "Create a simple optimization xcontrol file"
+  },
+  "Constrained optimization template": {
+    "prefix": "xtb.constrained",
+    "body": [
+      "# Constrained optimization",
+      "",
+      "\\$chrg ${1:0}",
+      "\\$spin ${2:0}",
+      "",
+      "\\$fix",
+      "   atoms: ${3:1-5}",
+      "\\$end",
+      "",
+      "\\$constrain",
+      "   distance: ${4:6,7,2.5}",
+      "\\$end",
+      "",
+      "\\$opt",
+      "   maxcycle=${5:200}",
+      "\\$end"
+    ],
+    "description": "Create a constrained optimization template"
+  }
+}

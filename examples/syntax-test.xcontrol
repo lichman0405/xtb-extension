@@ -1,0 +1,214 @@
+# xTB xcontrol Syntax Highlighting Test File
+# This file demonstrates all supported syntax patterns
+
+# ============================================
+# LOGICAL INSTRUCTIONS (single-line)
+# ============================================
+
+$chrg 0
+$spin 1
+$cmd xtb coord --opt
+$date 2025-12-11
+
+# ============================================
+# GROUP INSTRUCTIONS (with body and $end)
+# ============================================
+
+# Fix atoms during optimization
+$fix
+   atoms: 1-5,10,15-20
+   elements: C,H,N
+$end
+
+# Geometric constraints
+$constrain
+   # Distance constraint between atoms 1 and 2
+   distance: 1,2,2.5
+   
+   # Angle constraint
+   angle: 1,2,3,109.5
+   
+   # Dihedral angle
+   dihedral: 1,2,3,4,180.0
+$end
+
+# Confining potential (wall)
+$wall
+   potential=logfermi
+   sphere: auto,30
+   ellipsoid: 10,15,20
+   alpha=1.0
+   beta=6
+   temp=300.0
+$end
+
+# Output control
+$write
+   # Various output options
+   charges=true
+   wiberg=true
+   gbsa=false
+$end
+
+# Optimization settings
+$opt
+   maxcycle=200
+   microcycle=50
+   engine=rf
+   logfile='optimization.log'
+$end
+
+# ============================================
+# DIFFERENT NUMBER FORMATS
+# (Using valid options to demonstrate number types)
+# ============================================
+
+$constrain
+   # Integer list
+   atoms: 1,2,3,4,5
+   
+   # Float with decimal
+   distance: 1,2,2.5
+   
+   # Another distance with different format
+   distance: 3,4,1.234567
+   
+   # Angle with scientific notation-like value
+   angle: 1,2,3,1.0e+02
+   
+   # Dihedral with large value
+   dihedral: 1,2,3,4,180.0
+$end
+
+# ============================================
+# DIFFERENT VALUE TYPES
+# (Using valid wall options)
+# ============================================
+
+$wall
+   # Valid wall options with different value types
+   potential=logfermi
+   sphere: auto,30
+   alpha=1.5
+   beta=6
+   temp=300.0
+$end
+
+# Write instruction with boolean-like values
+$write
+   charges=true
+   wiberg=false
+   gbsa=yes
+$end
+
+# ============================================
+# OPERATOR VARIATIONS
+# ============================================
+
+# Colon operator (typically for lists)
+$fix
+   atoms: 1-10
+   elements: C,H
+$end
+
+# Equals operator (typically for single values)
+$wall
+   potential=logfermi
+   temp=300
+$end
+
+# Mixed operators in same block
+$opt
+   maxcycle=100
+   optlevel: normal
+   engine=rf
+$end
+
+# ============================================
+# COMMENTS
+# ============================================
+
+# Full-line comment
+
+$chrg 0  # Inline comment after instruction
+
+$fix
+   atoms: 1-5  # Inline comment after option
+   # Comment inside instruction block
+   elements: C
+$end
+
+# ============================================
+# COMPLEX REALISTIC EXAMPLE
+# ============================================
+
+# Optimization with constraints and confining potential
+# For a molecular system with fixed core
+
+$chrg -1
+$spin 0
+
+# Fix the core atoms
+$fix
+   atoms: 1-20  # Core residue atoms
+   elements: Fe  # Also fix metal center
+$end
+
+# Add distance constraints for coordination
+$constrain
+   distance: 21,22,2.8  # Metal-ligand distance
+   distance: 21,23,2.8
+   angle: 22,21,23,90.0  # Coordination geometry
+$end
+
+# Confining spherical wall to prevent dissociation
+$wall
+   potential=logfermi
+   sphere: auto,25.0
+   alpha=1.5
+   beta=8
+   temp=300.0
+$end
+
+# Optimization parameters
+$opt
+   maxcycle=500
+   engine=rf
+   optlevel: tight
+   logfile="opt.log"
+$end
+
+# Output control
+$write
+   charges=true
+   wiberg=true
+   gfn2=true
+$end
+
+# ============================================
+# EDGE CASES
+# ============================================
+
+# Empty instruction block
+$write
+$end
+
+# Single option
+$chrg 0
+
+# Long value lists
+$fix
+   atoms: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+$end
+
+# Special characters in strings
+$opt
+   logfile="path/to/output-file_2025.log"
+   comment='Test with special chars: @#$%^&*()'
+$end
+
+# Multiple spaces and tabs
+$wall
+   potential    =    logfermi
+   temp         =    300
+$end

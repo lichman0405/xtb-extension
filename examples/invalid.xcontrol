@@ -1,0 +1,39 @@
+# Invalid Syntax Examples
+# This file demonstrates syntax that should trigger diagnostics
+
+# Unknown instruction (should be highlighted as invalid)
+$unknown_instruction
+   some_option: value
+$end
+
+# Orphan option (outside any instruction block)
+orphan_option: this should be flagged
+
+$chrg 0
+
+# Another orphan
+another_orphan = value
+
+$fix
+   atoms: 1-5
+   # Duplicate single option (if atoms is marked as single)
+   atoms: 6-10
+$end
+
+# Missing $end for group instruction
+$constrain
+   distance: 1,2,2.5
+   angle: 1,2,3,109.5
+
+# Next instruction starts without closing previous
+$wall
+   potential=logfermi
+$end
+
+# Suspicious operator usage
+$wall
+   # Should use = for potential
+   potential: logfermi
+   # Should use : for sphere
+   sphere = auto,30
+$end

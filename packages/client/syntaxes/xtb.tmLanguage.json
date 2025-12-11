@@ -1,0 +1,178 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "xTB xcontrol",
+  "scopeName": "source.xtb-xcontrol",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#instructions"
+    },
+    {
+      "include": "#options"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.xtb-xcontrol",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "instructions": {
+      "patterns": [
+        {
+          "name": "keyword.control.instruction.group.xtb-xcontrol",
+          "match": "^\\s*(\\$(?:fix|constrain|wall|write|scan|metadyn|reactor|hess|siman|path|gfn|opt|scc))\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.instruction.xtb-xcontrol"
+            }
+          }
+        },
+        {
+          "name": "keyword.control.instruction.end.xtb-xcontrol",
+          "match": "^\\s*(\\$end)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.instruction.end.xtb-xcontrol"
+            }
+          }
+        },
+        {
+          "name": "keyword.control.instruction.logical.xtb-xcontrol",
+          "match": "^\\s*(\\$(?:chrg|spin|cmd|date|set|cma|symmetry|embedding))\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.instruction.logical.xtb-xcontrol"
+            }
+          }
+        },
+        {
+          "name": "keyword.control.instruction.unknown.xtb-xcontrol",
+          "match": "^\\s*(\\$[a-zA-Z][a-zA-Z0-9_-]*)\\b",
+          "captures": {
+            "1": {
+              "name": "invalid.illegal.unknown-instruction.xtb-xcontrol"
+            }
+          }
+        }
+      ]
+    },
+    "options": {
+      "patterns": [
+        {
+          "name": "meta.option.colon.xtb-xcontrol",
+          "match": "^\\s*([a-zA-Z][a-zA-Z0-9_-]*)\\s*(:)\\s*(.*)$",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.option-key.xtb-xcontrol"
+            },
+            "2": {
+              "name": "keyword.operator.assignment.colon.xtb-xcontrol"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#option-value"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "meta.option.equals.xtb-xcontrol",
+          "match": "^\\s*([a-zA-Z][a-zA-Z0-9_-]*)\\s*(=)\\s*(.*)$",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.option-key.xtb-xcontrol"
+            },
+            "2": {
+              "name": "keyword.operator.assignment.equals.xtb-xcontrol"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#option-value"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "option-value": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#booleans"
+        },
+        {
+          "name": "string.unquoted.option-value.xtb-xcontrol",
+          "match": "[^#\\s]+"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.xtb-xcontrol",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.xtb-xcontrol",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.xtb-xcontrol",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.xtb-xcontrol",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.scientific.xtb-xcontrol",
+          "match": "\\b[-+]?[0-9]*\\.?[0-9]+[eE][-+]?[0-9]+\\b"
+        },
+        {
+          "name": "constant.numeric.float.xtb-xcontrol",
+          "match": "\\b[-+]?[0-9]*\\.[0-9]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.xtb-xcontrol",
+          "match": "\\b[-+]?[0-9]+\\b"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.xtb-xcontrol",
+          "match": "\\b(true|false|on|off|yes|no|auto)\\b"
+        }
+      ]
+    }
+  }
+}

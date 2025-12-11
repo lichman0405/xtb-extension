@@ -1,0 +1,44 @@
+# Test file with ALL diagnostic issues
+# Each section tests one specific diagnostic rule
+
+# TEST R1: Unknown Instruction
+$this_is_unknown
+   some_option: value
+$end
+
+# TEST R5: Orphan Option (outside any block)
+orphan_key: orphan_value
+
+# TEST R2: Unknown Option in known instruction
+$fix
+   atoms: 1-5
+   unknown_option_here: test
+$end
+
+# TEST R6: Missing $end terminator
+$constrain
+   distance: 1,2,2.5
+   # No $end here!
+
+# TEST R3: Suspicious Operators
+$wall
+   potential: logfermi    # Should use = not :
+   sphere = auto,30       # Should use : not =
+   temp=300               # This is correct
+$end
+
+# TEST R4: Duplicate Single Option
+$wall
+   potential=logfermi
+   potential=polynomial   # Duplicate!
+   alpha=1.0
+   alpha=2.0             # Duplicate!
+$end
+
+# Multiple issues in one block
+$unknown_inst
+   orphan_before_this: value
+   unknown_opt: test
+   atoms: 1-5
+   atoms: 6-10           # Duplicate if atoms is single
+# Missing $end

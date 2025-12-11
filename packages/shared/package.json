@@ -1,0 +1,17 @@
+{
+  "name": "@xtb-xcontrol/shared",
+  "version": "0.1.0",
+  "description": "Shared types and schema for xTB xcontrol extension",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -b --watch",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "test": "echo \"No tests yet for shared package\""
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.2"
+  }
+}

@@ -1,0 +1,21 @@
+# Simple xTB xcontrol Example
+# Basic molecular optimization with constraints
+
+$chrg 0
+$spin 0
+
+$fix
+   atoms: 1-5
+   elements: C,H    
+$end
+
+$constrain
+   distance: 6,7,2.5
+$end
+
+$wall
+   potential=logfermi
+   sphere: auto,30
+   temp=300
+$end
+
